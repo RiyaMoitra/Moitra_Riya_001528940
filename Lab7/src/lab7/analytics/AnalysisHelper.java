@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -38,29 +40,29 @@ public class AnalysisHelper {
    
    
     public void postWithMostLikedComments(){
-        Map<Integer, Integer> postLikesCount = new HashMap<>();
+        Map<Integer, Integer> postwithmostLikesCount = new HashMap<>();
         Map<Integer, Post>posts=DataStore.getInstance().getPosts();
-        for(Post post: posts.values()){
+        for(Post p: posts.values()){
             
-            for(Comment comment : post.getComments()){
+            for(Comment comment : p.getComments()){
                 int likes =0;
-                if(postLikesCount.containsKey(post.getPostId())){
-                    likes = postLikesCount.get(post.getPostId());
+                if(postwithmostLikesCount.containsKey(p.getPostId())){
+                    likes = postwithmostLikesCount.get(p.getPostId());
                 }
                 likes += comment.getLikes();
-                postLikesCount.put(post.getPostId(), likes);
+                postwithmostLikesCount.put(p.getPostId(), likes);
             }
             
         }
         int max = 0;
         int maxid = 0;
-        for(int id : postLikesCount.keySet()){
-            if(postLikesCount.get(id) > max){
-                max = postLikesCount.get(id);
+        for(int id : postwithmostLikesCount.keySet()){
+            if(postwithmostLikesCount.get(id) > max){
+                max = postwithmostLikesCount.get(id);
                 maxid = id;
             }
         }
-        System.out.println("\n"+"post with most liked comments" +"\n"+"postid : "+ maxid + " with likes : " + max);
+        System.out.println("post with most liked comments" +"\n"+"postid : "+ maxid + " with likes : " + max);
     }
     
     public void postWithMostComments(){
@@ -68,15 +70,15 @@ public class AnalysisHelper {
         Map<Integer, Post> posts = DataStore.getInstance().getPosts();
         int maxCommentSize = 0;
         int postid = 0;
-        for(Post post: posts.values()){
+        for(Post p: posts.values()){
             
-            if(post.getComments().size() > maxCommentSize){
-                maxCommentSize = post.getComments().size();
-                postid = post.getPostId();
+            if(p.getComments().size() > maxCommentSize){
+                maxCommentSize = p.getComments().size();
+                postid = p.getPostId();
             }
         }
         
-        System.out.println("\n"+"post with most comments" +"\n"+"postid : "+ postid + " with comment size : " + maxCommentSize);
+        System.out.println("post with most comments" +"\n"+"postid : "+ postid + " with comment size : " + maxCommentSize);
         
     }
 
@@ -89,12 +91,12 @@ public class AnalysisHelper {
         
        
         
-        for(Post post: posts.values()){
-            if(!(users.containsKey(post.getUserId()))){
-                users.put(post.getUserId(),1);
+        for(Post p: posts.values()){
+            if(!(users.containsKey(p.getUserId()))){
+                users.put(p.getUserId(),1);
             }
             else{
-                users.put(post.getUserId(),users.get(post.getUserId())+1);
+                users.put(p.getUserId(),users.get(p.getUserId())+1);
             }
             
         }
@@ -117,7 +119,7 @@ public class AnalysisHelper {
             int j = 0;
             for (int i = 0; i < 5; i++) {
                 j = i + 1;
-                System.out.println("Inactive User: " + j + " user id " + listOfEntries.get(i).getKey()
+                System.out.println(" user id " + listOfEntries.get(i).getKey()
                         + " with number of posts: " + listOfEntries.get(i).getValue());
             }
         }
@@ -130,8 +132,8 @@ public class AnalysisHelper {
         Map<Integer, User> user = DataStore.getInstance().getUsers();
         Map<Integer, Integer> commentSize = new HashMap<>();
         
-        for(User users: user.values()){
-            commentSize.put(users.getId(),users.getComments().size());
+        for(User u: user.values()){
+            commentSize.put(u.getId(),u.getComments().size());
         }
         
         Set<Map.Entry<Integer, Integer>> entrySet = commentSize.entrySet();
@@ -152,7 +154,7 @@ public class AnalysisHelper {
             int j = 0;
             for (int i = 0; i < 5; i++) {
                 j = i + 1;
-                System.out.println("Inactive User: " + j + " user id " + listOfEntries.get(i).getKey()
+                System.out.println(" user id " + listOfEntries.get(i).getKey()
                         + " with number of comments: " + listOfEntries.get(i).getValue());
             }
         }
@@ -160,6 +162,92 @@ public class AnalysisHelper {
 
 }
 
+    public void inactiveUsersOverAll(){
+        Map<Integer, User> user = DataStore.getInstance().getUsers();
+        Map<Integer, Post> posts = DataStore.getInstance().getPosts();
+        Map<Integer, Comment> comments = DataStore.getInstance().getComments();
+        Map<Integer, Integer> inactiveOverall = new HashMap<>();
+        
+        for(User u: user.values()){
+            inactiveOverall.put(u.getId(), u.getComments().size());
+        }
+        
+        for(Post p: posts.values()){
+            inactiveOverall.put(p.getUserId(), inactiveOverall.get(p.getUserId())+1);
+        }
+        
+        for(Comment c : comments.values()){
+            inactiveOverall.put(c.getUserId(), inactiveOverall.get(c.getUserId()) + c.getLikes());
+        }
+        
+        
+        Set<Map.Entry<Integer, Integer>> entrySet = inactiveOverall.entrySet();
+          Comparator<Map.Entry<Integer, Integer>> comparator = new Comparator<Map.Entry<Integer, Integer>>() {
+            @Override
+            public int compare(Map.Entry<Integer, Integer> entry1, Map.Entry<Integer, Integer> entry2) {
+                Integer value1 = entry1.getValue();
+                Integer value2 = entry2.getValue();
+                return value1.compareTo(value2);
+            }
+        };
+
+        List<Map.Entry<Integer, Integer>> listOfEntries = new ArrayList<>(entrySet);
+        Collections.sort(listOfEntries, comparator);
+
+        System.out.println("Top 5 Inactive Users based on overall criteria:");
+        if (inactiveOverall.size() > 5) {
+            int j = 0;
+            for (int i = 0; i < 5; i++) {
+                j = i + 1;
+                System.out.println(" user id " + listOfEntries.get(i).getKey()
+                        + " with sum of posts, comments and likes: " + listOfEntries.get(i).getValue());
+            }
+        }
+        System.out.println();
+        
+    }
+   
+    public void proactiveUsersOverAll(){
+           Map<Integer, User> user = DataStore.getInstance().getUsers();
+        Map<Integer, Post> posts = DataStore.getInstance().getPosts();
+        Map<Integer, Comment> comments = DataStore.getInstance().getComments();
+        Map<Integer, Integer> proactiveOverall = new HashMap<>();
+        
+        for(User u: user.values()){
+            proactiveOverall.put(u.getId(), u.getComments().size());
+        }
+        
+        for(Post p: posts.values()){
+            proactiveOverall.put(p.getUserId(), proactiveOverall.get(p.getUserId())+1);
+        }
+        
+        for(Comment comment : comments.values()){
+            proactiveOverall.put(comment.getUserId(), proactiveOverall.get(comment.getUserId()) + comment.getLikes());
+        }
+        
+        
+        List<Map.Entry<Integer, Integer>> list = new LinkedList<>(proactiveOverall.entrySet());
+        Collections.sort(list, new Comparator<Map.Entry<Integer, Integer>>() {
+            public int compare(Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2) {
+                return o2.getValue() - o1.getValue();
+            }
+        });
+        HashMap<Integer, Integer> temp = new LinkedHashMap<>();
+        for (Map.Entry<Integer, Integer> aa : list) {
+            temp.put(aa.getKey(), aa.getValue());
+        }
+        System.out.println("\n:\nTop 5 proactive users by overall criterias:");
+        int count = 0;
+        for (Map.Entry<Integer, Integer> entry : temp.entrySet()) {
+            if (count >= 5) {
+                return;
+            }
+            System.out.println("User Id = " + entry.getKey() + " Sum of post, likes and comments = " + entry.getValue());
+            count++;
+        }
+    }
+    }
 
 
-}
+
+

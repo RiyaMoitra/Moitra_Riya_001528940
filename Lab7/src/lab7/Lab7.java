@@ -96,6 +96,7 @@ public class Lab7 {
         helper.postWithMostLikedComments();
         helper.postWithMostComments();
         helper.inactiveUsersBasedOnPosts();
-        helper.inactiveUsersBasedOnComments();
+        helper.inactiveUsersOverAll();
+        helper.proactiveUsersOverAll();
     }
 }
