@@ -34,7 +34,7 @@ public class MainJFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainJFrame
      */
-    private EcoSystem system;
+    private EcoSystem business;
     private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
 
     private CustomerDirectory customerDirectory;
@@ -46,7 +46,7 @@ public class MainJFrame extends javax.swing.JFrame {
     
     public MainJFrame() throws IOException {
         initComponents();
-        system = dB4OUtil.retrieveSystem();
+        business = dB4OUtil.retrieveSystem();
         this.setSize(1680, 1050);
         
        
@@ -158,10 +158,10 @@ public class MainJFrame extends javax.swing.JFrame {
        String password = String.valueOf(passwordCharArray);
        
        //Step1: Check in the system admin user account directory if you have the user
-       UserAccount userAccount=system.getUserAccountDirectory().authenticateUser(userName, password);
+       UserAccount userAccount=business.getUserAccountDirectory().authenticateUser(userName, password);
        if(userAccount != null){
           CardLayout layout=(CardLayout)container.getLayout();
-            container.add("workArea",userAccount.getRole().createWorkArea(container, userAccount, system,customerDirectory,restaurantDirectory,deliveryManDirectory,menuDirectory,orderDirectory));
+            container.add("workArea",userAccount.getRole().createWorkArea(container, userAccount, business,customerDirectory,restaurantDirectory,deliveryManDirectory,menuDirectory,orderDirectory));
             layout.next(container);
             userNameJTextField.setText("");
             passwordField.setText("");
@@ -196,7 +196,7 @@ public class MainJFrame extends javax.swing.JFrame {
         container.add("blank", blankJP);
         CardLayout crdLyt = (CardLayout) container.getLayout();
         crdLyt.next(container);
-        dB4OUtil.storeSystem(system);
+        dB4OUtil.storeSystem(business);
     }//GEN-LAST:event_logoutJButtonActionPerformed
 
     /**
