@@ -24,7 +24,7 @@ public class RestaurantDirectory {
     }
     
     public ArrayList<Restaurant> getRestaurantDirectory() {
-        return restaurantDirectory;
+        return this.restaurantDirectory;
     }
 
     public void setRestaurantDirectory(ArrayList<Restaurant> restaurantDirectory) {

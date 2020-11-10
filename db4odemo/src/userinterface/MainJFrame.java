@@ -76,6 +76,7 @@ public class MainJFrame extends javax.swing.JFrame {
         loginJLabel = new javax.swing.JLabel();
         logoutJButton = new javax.swing.JButton();
         container = new javax.swing.JPanel();
+        CardSequenceJPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -140,6 +141,20 @@ public class MainJFrame extends javax.swing.JFrame {
         jSplitPane1.setLeftComponent(jPanel1);
 
         container.setLayout(new java.awt.CardLayout());
+
+        javax.swing.GroupLayout CardSequenceJPanelLayout = new javax.swing.GroupLayout(CardSequenceJPanel);
+        CardSequenceJPanel.setLayout(CardSequenceJPanelLayout);
+        CardSequenceJPanelLayout.setHorizontalGroup(
+            CardSequenceJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 546, Short.MAX_VALUE)
+        );
+        CardSequenceJPanelLayout.setVerticalGroup(
+            CardSequenceJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 425, Short.MAX_VALUE)
+        );
+
+        container.add(CardSequenceJPanel, "card2");
+
         jSplitPane1.setRightComponent(container);
 
         getContentPane().add(jSplitPane1, java.awt.BorderLayout.CENTER);
@@ -159,6 +174,7 @@ public class MainJFrame extends javax.swing.JFrame {
        
        //Step1: Check in the system admin user account directory if you have the user
        UserAccount userAccount=business.getUserAccountDirectory().authenticateUser(userName, password);
+       //JOptionPane.showMessageDialog(null, "Username"+userAccount.getRole().toString());
        if(userAccount != null){
           CardLayout layout=(CardLayout)container.getLayout();
             container.add("workArea",userAccount.getRole().createWorkArea(container, userAccount, business,customerDirectory,restaurantDirectory,deliveryManDirectory,menuDirectory,orderDirectory));
@@ -193,7 +209,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         container.removeAll();
         JPanel blankJP = new JPanel();
-        container.add("blank", blankJP);
+        container.add("blank", CardSequenceJPanel);
         CardLayout crdLyt = (CardLayout) container.getLayout();
         crdLyt.next(container);
         dB4OUtil.storeSystem(business);
@@ -238,6 +254,7 @@ public class MainJFrame extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel CardSequenceJPanel;
     private javax.swing.JPanel container;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

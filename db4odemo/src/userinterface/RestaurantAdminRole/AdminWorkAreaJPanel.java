@@ -10,6 +10,7 @@ import Business.Order.OrderDirectory;
 import Business.Restaurant.RestaurantDirectory;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
+import static java.time.Clock.system;
 import javax.swing.JPanel;
 
 /**
@@ -53,6 +54,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         enterpriseLabel = new javax.swing.JLabel();
         valueLabel = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -94,16 +96,25 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     private void manageRestairantJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageRestairantJButtonActionPerformed
         // TODO add your handling code here:
         
+        ManageResturantInfoJPanel manageResturantInfoJPanel = new ManageResturantInfoJPanel(userProcessContainer,account, business, restaurantDirectory,menuDirectory);
+        userProcessContainer.add("manageResturantInfoJPanel",manageResturantInfoJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+        
     }//GEN-LAST:event_manageRestairantJButtonActionPerformed
 
     private void manageMenuJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageMenuJButtonActionPerformed
 
+        ManageMenuJPanel manageMenuJPanel = new ManageMenuJPanel(userProcessContainer,account, business, restaurantDirectory,menuDirectory);
+        userProcessContainer.add("manageMenuJPanel",manageMenuJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_manageMenuJButtonActionPerformed
 
     private void manageOrderJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageOrderJButtonActionPerformed
 
-        ManageRestaurantOrderJPanel manageResturantInfoJPanel = new ManageRestaurantOrderJPanel(userProcessContainer,account, business, restaurantDirectory,deliveryManDirectory,menuDirectory,orderDirectory);
-        userProcessContainer.add("manageResturantInfoJPanel",manageResturantInfoJPanel);
+        ManageRestaurantOrderJPanel manageResturantOrderJPanel = new ManageRestaurantOrderJPanel(userProcessContainer,account, business, restaurantDirectory,deliveryManDirectory,menuDirectory,orderDirectory);
+        userProcessContainer.add("manageResturantOrderJPanel",manageResturantOrderJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
         

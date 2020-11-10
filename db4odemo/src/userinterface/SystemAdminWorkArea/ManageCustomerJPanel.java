@@ -30,11 +30,11 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
     public EcoSystem business;
     
 
-    ManageCustomerJPanel(JPanel userProcessContainer, EcoSystem business, CustomerDirectory customerDirectory) {
+    ManageCustomerJPanel(JPanel container, EcoSystem business, CustomerDirectory customerDirectory) {
 
          initComponents();
         this.customerDirectory = customerDirectory;
-        this.container = userProcessContainer;
+        this.container = container;
         this.business = business;
         populateTable();
 
@@ -74,6 +74,7 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
         addCustomerBtn = new javax.swing.JButton();
         viewCustomerbtn = new javax.swing.JButton();
         deleteCustomerbtn = new javax.swing.JButton();
+        btnRefresh = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -129,46 +130,56 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnRefresh.setText("Refresh");
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(backBtn))
+                        .addComponent(backBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnRefresh)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(addCustomerBtn)
+                                .addGap(18, 18, 18)
+                                .addComponent(viewCustomerbtn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(deleteCustomerbtn)))
+                        .addGap(51, 51, 51))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(Customer))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 638, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(101, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(addCustomerBtn)
-                .addGap(18, 18, 18)
-                .addComponent(viewCustomerbtn)
-                .addGap(18, 18, 18)
-                .addComponent(deleteCustomerbtn)
-                .addGap(165, 165, 165))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 638, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Customer))
+                        .addGap(0, 84, Short.MAX_VALUE)))
+                .addGap(54, 54, 54))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addComponent(Customer)
-                .addGap(18, 18, 18)
+                .addGap(12, 12, 12)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(deleteCustomerbtn)
                     .addComponent(viewCustomerbtn)
                     .addComponent(addCustomerBtn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addComponent(backBtn)
-                .addGap(14, 14, 14))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRefresh)
+                    .addComponent(backBtn))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -226,11 +237,18 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_deleteCustomerbtnActionPerformed
 
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        // TODO add your handling code here:
+        populateTable();
+        
+    }//GEN-LAST:event_btnRefreshActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Customer;
     private javax.swing.JButton addCustomerBtn;
     private javax.swing.JButton backBtn;
+    private javax.swing.JButton btnRefresh;
     private javax.swing.JTable customerJTable;
     private javax.swing.JButton deleteCustomerbtn;
     private javax.swing.JScrollPane jScrollPane1;

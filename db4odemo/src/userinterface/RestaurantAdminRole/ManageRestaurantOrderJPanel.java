@@ -208,16 +208,13 @@ public void populateTable() {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 643, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, 0)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jButton5)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jButton2))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jButton4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jButton1))))))
+                                .addComponent(jButton5)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton2))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jButton4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton1))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -243,7 +240,7 @@ public void populateTable() {
                 .addGap(24, 24, 24)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2)
                     .addComponent(jButton5))
                 .addGap(18, 18, 18)
@@ -272,7 +269,7 @@ public void populateTable() {
         int count = orderTable.getSelectedRowCount();
         if (count == 1) {
             if (row >= 0) {
-                String id = (String) orderTable.getValueAt(row, 9);
+                String id = (String) orderTable.getValueAt(row, 8);
                 Order order = business.getOrderDirectory().getOrderByOrderId(id);//orderDirectory.getOrderDirectory().get(row);
                 order.setStatus("Confirmed");
                 JOptionPane.showMessageDialog(null, "Order Confirmed!");

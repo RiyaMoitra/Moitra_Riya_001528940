@@ -32,7 +32,7 @@ public class ManageRestaurantJPanel extends javax.swing.JPanel {
     public EmployeeDirectory employeeDirectory;
     
     
-    ManageRestaurantJPanel(JPanel userProcessContainer, EcoSystem business, RestaurantDirectory restaurantDirectory) {
+    ManageRestaurantJPanel(JPanel container, EcoSystem business, RestaurantDirectory restaurantDirectory) {
 
         initComponents();
         this.container = container;
@@ -89,6 +89,7 @@ public class ManageRestaurantJPanel extends javax.swing.JPanel {
         addRestaurantBtn = new javax.swing.JButton();
         viewRestaurantDetailsBtn = new javax.swing.JButton();
         deleteRestaurantBtn = new javax.swing.JButton();
+        btnRefresh = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -144,27 +145,33 @@ public class ManageRestaurantJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnRefresh.setText("Refresh");
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(176, Short.MAX_VALUE)
-                .addComponent(addRestaurantBtn)
-                .addGap(18, 18, 18)
-                .addComponent(viewRestaurantDetailsBtn)
-                .addGap(18, 18, 18)
-                .addComponent(deleteRestaurantBtn)
-                .addGap(282, 282, 282))
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(backBtn))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(addRestaurantBtn)
+                            .addComponent(backBtn))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(viewRestaurantDetailsBtn)
+                                .addGap(18, 18, 18)
+                                .addComponent(deleteRestaurantBtn)))))
+                .addContainerGap(452, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -182,7 +189,9 @@ public class ManageRestaurantJPanel extends javax.swing.JPanel {
                     .addComponent(viewRestaurantDetailsBtn)
                     .addComponent(addRestaurantBtn))
                 .addGap(32, 32, 32)
-                .addComponent(backBtn)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(backBtn)
+                    .addComponent(btnRefresh))
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -245,10 +254,16 @@ public class ManageRestaurantJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_deleteRestaurantBtnActionPerformed
 
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        // TODO add your handling code here:
+        populateTable();
+    }//GEN-LAST:event_btnRefreshActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addRestaurantBtn;
     private javax.swing.JButton backBtn;
+    private javax.swing.JButton btnRefresh;
     private javax.swing.JButton deleteRestaurantBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

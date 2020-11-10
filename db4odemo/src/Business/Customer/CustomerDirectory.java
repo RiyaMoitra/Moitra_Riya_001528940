@@ -7,7 +7,8 @@ package Business.Customer;
 
 import Business.EcoSystem;
 import java.util.ArrayList;
-
+import Business.UserAccount.UserAccount;
+import Business.UserAccount.UserAccountDirectory;
 /**
  *
  * @author harold
@@ -18,7 +19,8 @@ public class CustomerDirectory {
     
     public CustomerDirectory(){
         customerDirectory = new ArrayList<Customer>();
-     
+    // Customer customer1 = new Customer("C1", "Riya", "1234567890", "Boston");
+      // customerDirectory.add(customer1);
     }
 
     public ArrayList<Customer> getCustomerDirectory() {

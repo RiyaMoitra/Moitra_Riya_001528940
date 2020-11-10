@@ -24,11 +24,14 @@ public class AdminRole extends Role{
 
     
 
-    @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, EcoSystem business, CustomerDirectory customerDirectory, RestaurantDirectory restaurantDirectory, DeliveryManDirectory deliveryManDirectory, MenuDirectory menuDirectory, OrderDirectory orderDirectory) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+   
+        @Override
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, EcoSystem business, CustomerDirectory customerDirectory,RestaurantDirectory restaurantDirectory, DeliveryManDirectory deliveryManDirectory,MenuDirectory menuDirectory, OrderDirectory orderDirectory) {
+        return new AdminWorkAreaJPanel(userProcessContainer,account,business,restaurantDirectory,deliveryManDirectory,menuDirectory,orderDirectory);
+    }
+
+
     }
 
     
     
-}

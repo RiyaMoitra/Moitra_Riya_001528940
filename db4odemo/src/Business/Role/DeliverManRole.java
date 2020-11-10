@@ -21,11 +21,9 @@ import userinterface.DeliveryManRole.DeliveryManWorkAreaJPanel;
  */
 public class DeliverManRole extends Role {
 
-    
-
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, EcoSystem business, CustomerDirectory customerDirectory, RestaurantDirectory restaurantDirectory, DeliveryManDirectory deliveryManDirectory, MenuDirectory menuDirectory, OrderDirectory orderDirectory) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new DeliveryManWorkAreaJPanel(userProcessContainer,account,business,deliveryManDirectory,orderDirectory);//To change body of generated methods, choose Tools | Templates.
     }
     
 }

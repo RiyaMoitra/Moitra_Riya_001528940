@@ -211,7 +211,7 @@ public class ViewCustomersJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     public boolean phoneFormat(String phone){
-        String regex = "^\\(?([0-9]{10})\\)$";
+        String regex = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$";
         Pattern pattern = Pattern.compile(regex);
         
         Matcher matcher = pattern.matcher(phone);
